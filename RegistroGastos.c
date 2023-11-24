@@ -15,7 +15,7 @@ void inserirGasto(struct Gasto *gastos, int *numGastos) {
         return;
     }
 
-    printf("Digite a descriÁ„o do gasto: ");
+    printf("Digite a descri√ß√£o do gasto: ");
     scanf("%s", gastos[*numGastos].descricao);
 
     printf("Digite o valor do gasto: ");
@@ -37,7 +37,7 @@ void exibirGastos(struct Gasto *gastos, int numGastos) {
 
     printf("Lista de gastos:\n");
     for (int i = 0; i < numGastos; i++) {
-        printf("[%d] DescriÁ„o: %s\n", i, gastos[i].descricao);
+        printf("[%d] Descri√ß√£o: %s\n", i, gastos[i].descricao);
         printf("    Valor: %.2f\n", gastos[i].valor);
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
@@ -51,16 +51,16 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
     }
 
     int indice;
-    printf("Digite o Ìndice do gasto: ");
+    printf("Digite o √≠ndice do gasto: ");
     scanf("%d", &indice);
 
     if (indice < 0 || indice >= numGastos) {
-        printf("Õndice inv·lido.\n");
+        printf("√çndice inv√°lido.\n");
         return;
     }
 
     printf("Gasto encontrado:\n");
-    printf("DescriÁ„o: %s\n", gastos[indice].descricao);
+    printf("Descri√ß√£o: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
 }
@@ -68,7 +68,7 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
 void editarGasto(struct Gasto *gastos, int numGastos) {
     buscarGasto(gastos, numGastos);
 
-    // Restante do cÛdigo para editar o gasto, se necess·rio
+    // Restante do c√≥digo para editar o gasto, se necess√°rio
 }
 
 int main() {
@@ -85,9 +85,8 @@ int main() {
         printf("2. Exibir gastos\n");
         printf("3. Buscar nome do gasto\n");
         printf("4. Editar gasto\n");
-        // Removendo as opÁıes que ainda n„o foram implementadas
+        // Removendo as op√ß√µes que ainda n√£o foram implementadas
         printf("0. Sair\n");
-        printf("Escolha uma opÁ„o: ");
         scanf("%d", &escolha);
 
         switch (escolha) {
@@ -104,13 +103,12 @@ int main() {
                 editarGasto(gastos, numGastos);
                 break;
             case 0:
-                printf("Saindo do programa. AtÈ mais!\n");
+                printf("Saindo do programa. At√© mais!\n");
                 break;
             default:
-                printf("OpÁ„o inv·lida. Tente novamente.\n");
+                printf("Op√ß√£o inv√°lida. Tente novamente.\n");
         }
     } while (escolha != 0);
 
     return 0;
 }
-
