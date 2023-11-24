@@ -15,7 +15,7 @@ void inserirGasto(struct Gasto *gastos, int *numGastos) {
         return;
     }
 
-    printf("Digite a descriÁ„o do gasto: ");
+    printf("Digite a descri√ß√£o do gasto: ");
     scanf("%s", gastos[*numGastos].descricao);
 
     printf("Digite o valor do gasto: ");
@@ -37,7 +37,7 @@ void exibirGastos(struct Gasto *gastos, int numGastos) {
 
     printf("Lista de gastos:\n");
     for (int i = 0; i < numGastos; i++) {
-        printf("[%d] DescriÁ„o: %s\n", i, gastos[i].descricao);
+        printf("[%d] Descri√ß√£o: %s\n", i, gastos[i].descricao);
         printf("    Valor: %.2f\n", gastos[i].valor);
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
@@ -51,11 +51,11 @@ int buscarGasto(struct Gasto *gastos, int numGastos) {
     }
 
     int indice;
-    printf("Digite o Ìndice do gasto: ");
+    printf("Digite o √≠ndice do gasto: ");
     scanf("%d", &indice);
 
     if (indice < 0 || indice >= numGastos) {
-        printf("Õndice inv·lido.\n");
+        printf("√çndice inv√°lido.\n");
         return -1;
     }
 
@@ -66,8 +66,8 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
     int indice = buscarGasto(gastos, numGastos);
 
     if (indice != -1) {
-        printf("Novas informaÁıes para o gasto:\n");
-        printf("Digite a descriÁ„o do gasto: ");
+        printf("Novas informa√ß√µes para o gasto:\n");
+        printf("Digite a descri√ß√£o do gasto: ");
         scanf("%s", gastos[indice].descricao);
 
         printf("Digite o valor do gasto: ");
@@ -81,20 +81,24 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
 }
 
 int main() {
-	setlocale(LC_ALL, "Portuguese");
-	
+  setlocale(LC_ALL, "Portuguese");
+
     struct Gasto gastos[100];
     int numGastos = 0;
     int escolha;
 
-	printf("Bem vindo ao seu Registro de Gastos\n");
+  printf("Bem vindo ao seu Registro de Gastos\n");
     do {
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
-        printf("3. Editar gasto\n");
+        printf("3. Buscar nome do gasto\n");
+        printf("4. Editar gasto\n");
+        printf("5. Remover gasto\n");
+        printf("6. Soma e Media de gastos\n");
+        printf("7. Salvar gasto em um arquivo\n");
         printf("0. Sair\n");
-        printf("Escolha uma opÁ„o: ");
+        printf("Escolha uma op√ß√£o: ");
         scanf("%d", &escolha);
 
         switch (escolha) {
@@ -105,16 +109,27 @@ int main() {
                 exibirGastos(gastos, numGastos);
                 break;
             case 3:
+                buscarGasto(gastos, numGastos);
+                break;
+            case 4:
                 editarGasto(gastos, numGastos);
                 break;
+            case 5:
+                removerGasto(gastos, numGastos);
+                break;
+            case 6:
+                mediaGasto(gastos, numGastos);
+                break;
+            case 7:
+                salvarGasto(gastos, numGastos);
+                break;
             case 0:
-                printf("Saindo do programa. AtÈ mais!\n");
+                printf("Saindo do programa. At√© mais!\n");
                 break;
             default:
-                printf("OpÁ„o inv·lida. Tente novamente.\n");
+                printf("Op√ß√£o inv√°lida. Tente novamente.\n");
         }
     } while (escolha != 0);
 
     return 0;
 }
-
