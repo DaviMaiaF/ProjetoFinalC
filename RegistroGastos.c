@@ -44,10 +44,10 @@ void exibirGastos(struct Gasto *gastos, int numGastos) {
     }
 }
 
-int buscarGasto(struct Gasto *gastos, int numGastos) {
+void buscarGasto(struct Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("Nenhum gasto cadastrado.\n");
-        return -1;
+        return;
     }
 
     int indice;
@@ -56,49 +56,37 @@ int buscarGasto(struct Gasto *gastos, int numGastos) {
 
     if (indice < 0 || indice >= numGastos) {
         printf("Índice inválido.\n");
-        return -1;
+        return;
     }
 
-    return indice;
+    printf("Gasto encontrado:\n");
+    printf("Descrição: %s\n", gastos[indice].descricao);
+    printf("Valor: %.2f\n", gastos[indice].valor);
+    printf("Data: %s\n", gastos[indice].data);
 }
 
 void editarGasto(struct Gasto *gastos, int numGastos) {
-    int indice = buscarGasto(gastos, numGastos);
+    buscarGasto(gastos, numGastos);
 
-    if (indice != -1) {
-        printf("Novas informações para o gasto:\n");
-        printf("Digite a descrição do gasto: ");
-        scanf("%s", gastos[indice].descricao);
-
-        printf("Digite o valor do gasto: ");
-        scanf("%f", &gastos[indice].valor);
-
-        printf("Digite a data do gasto (dd/mm/yyyy): ");
-        scanf("%s", gastos[indice].data);
-
-        printf("Gasto editado com sucesso!\n");
-    }
+    // Restante do código para editar o gasto, se necessário
 }
 
 int main() {
-  setlocale(LC_ALL, "Portuguese");
+    setlocale(LC_ALL, "Portuguese");
 
     struct Gasto gastos[100];
     int numGastos = 0;
     int escolha;
 
-  printf("Bem vindo ao seu Registro de Gastos\n");
+    printf("Bem vindo ao seu Registro de Gastos\n");
     do {
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
         printf("3. Buscar nome do gasto\n");
         printf("4. Editar gasto\n");
-        printf("5. Remover gasto\n");
-        printf("6. Soma e Media de gastos\n");
-        printf("7. Salvar gasto em um arquivo\n");
+        // Removendo as opções que ainda não foram implementadas
         printf("0. Sair\n");
-        printf("Escolha uma opção: ");
         scanf("%d", &escolha);
 
         switch (escolha) {
@@ -113,15 +101,6 @@ int main() {
                 break;
             case 4:
                 editarGasto(gastos, numGastos);
-                break;
-            case 5:
-                removerGasto(gastos, numGastos);
-                break;
-            case 6:
-                mediaGasto(gastos, numGastos);
-                break;
-            case 7:
-                salvarGasto(gastos, numGastos);
                 break;
             case 0:
                 printf("Saindo do programa. Até mais!\n");
