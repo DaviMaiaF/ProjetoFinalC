@@ -59,17 +59,46 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
         return;
     }
 
+    getchar();
+  
     printf("Gasto encontrado:\n");
     printf("Descrição: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
+
+    return;
 }
 
 void editarGasto(struct Gasto *gastos, int numGastos) {
-    buscarGasto(gastos, numGastos);
+  int indice;
+  
+  if (numGastos == 0) {
+    printf("Nenhum gasto cadastrado.\n");
+    return;
+  }
+  
+  printf("Digite o índice do gasto a ser editado: ");
+  scanf("%d", &indice);
 
-    // Restante do código para editar o gasto, se necessário
+  if (indice < 0 || indice >= numGastos) {
+    printf("Índice inválido.\n");
+    return;
+  }
+
+  getchar();
+
+  printf("Insira a nova descrição: ");
+  scanf("%s", gastos[indice].descricao);
+
+  printf("Insira o novo valor: ");
+  scanf("%f", &gastos[indice].valor);
+
+  printf("Insira a nova data (dd/mm/yyyy): ");
+  scanf("%s", gastos[indice].data);
+
+  printf("Gasto editado com sucesso!\n");
 }
+
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -85,7 +114,7 @@ int main() {
         printf("2. Exibir gastos\n");
         printf("3. Buscar nome do gasto\n");
         printf("4. Editar gasto\n");
-        // Removendo as opções que ainda não foram implementadas
+
         printf("0. Sair\n");
         scanf("%d", &escolha);
 
