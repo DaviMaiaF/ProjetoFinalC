@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 
+
 struct Gasto {
     char descricao[100];
     float valor;
@@ -15,7 +16,7 @@ void inserirGasto(struct Gasto *gastos, int *numGastos) {
         return;
     }
 
-    printf("Digite a descriÃ§Ã£o do gasto: ");
+    printf("Digite a descrição do gasto: ");
     scanf("%s", gastos[*numGastos].descricao);
 
     printf("Digite o valor do gasto: ");
@@ -70,35 +71,58 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
 }
 
 void editarGasto(struct Gasto *gastos, int numGastos) {
-  int indice;
-  
-  if (numGastos == 0) {
-    printf("Nenhum gasto cadastrado.\n");
-    return;
-  }
-  
-  printf("Digite o indice do gasto a ser editado: ");
-  scanf("%d", &indice);
+    if (numGastos == 0) {
+        printf("Nenhum gasto cadastrado.\n");
+        return;
+    }
 
-  if (indice < 0 || indice >= numGastos) {
-    printf("Indice inválido.\n");
-    return;
-  }
+    char nomeBusca[100];
+    printf("Digite o nome do gasto que deseja editar: ");
+    scanf("%s", nomeBusca);
 
-  getchar();
+    int indice = -1;  // Inicializa como -1 para indicar que não foi encontrado
+    for (int i = 0; i < numGastos; i++) {
+        if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
+            indice = i;
+            break;
+        }
+    }
 
-  printf("Insira a nova descrição: ");
-  scanf("%s", gastos[indice].descricao);
+    if (indice == -1) {
+        printf("Gasto não encontrado.\n");
+        return;
+    }
 
-  printf("Insira o novo valor: ");
-  scanf("%f", &gastos[indice].valor);
+    getchar();  // Limpar o buffer do teclado
 
-  printf("Insira a nova data (dd/mm/yyyy): ");
-  scanf("%s", gastos[indice].data);
+    printf("Escolha qual informação deseja editar:\n");
+    printf("1. Descrição\n");
+    printf("2. Valor\n");
+    printf("3. Data\n");
 
-  printf("Gasto editado com sucesso!\n");
+    int escolha;
+    scanf("%d", &escolha);
+
+    switch (escolha) {
+        case 1:
+            printf("Insira a nova descrição: ");
+            scanf("%s", gastos[indice].descricao);
+            break;
+        case 2:
+            printf("Insira o novo valor: ");
+            scanf("%f", &gastos[indice].valor);
+            break;
+        case 3:
+            printf("Insira a nova data (dd/mm/yyyy): ");
+            scanf("%s", gastos[indice].data);
+            break;
+        default:
+            printf("Opção inválida.\n");
+            return;
+    }
+
+    printf("Gasto editado com sucesso!\n");
 }
-
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -141,3 +165,4 @@ int main() {
 
     return 0;
 }
+
