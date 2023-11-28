@@ -37,7 +37,7 @@ void exibirGastos(struct Gasto *gastos, int numGastos) {
 
     printf("Lista de gastos:\n");
     for (int i = 0; i < numGastos; i++) {
-        printf("[%d] Descri√ß√£o: %s\n", i, gastos[i].descricao);
+        printf("[%d] DescriÁ„o: %s\n", i, gastos[i].descricao);
         printf("    Valor: %.2f\n", gastos[i].valor);
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
@@ -51,18 +51,18 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
     }
 
     int indice;
-    printf("Digite o √≠ndice do gasto: ");
+    printf("Digite o Indice do gasto: ");
     scanf("%d", &indice);
 
     if (indice < 0 || indice >= numGastos) {
-        printf("√çndice inv√°lido.\n");
+        printf("Indice inv·lido.\n");
         return;
     }
 
     getchar();
   
     printf("Gasto encontrado:\n");
-    printf("Descri√ß√£o: %s\n", gastos[indice].descricao);
+    printf("DescriÁ„o: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
 
@@ -77,17 +77,17 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
     return;
   }
   
-  printf("Digite o √≠ndice do gasto a ser editado: ");
+  printf("Digite o indice do gasto a ser editado: ");
   scanf("%d", &indice);
 
   if (indice < 0 || indice >= numGastos) {
-    printf("√çndice inv√°lido.\n");
+    printf("Indice inv·lido.\n");
     return;
   }
 
   getchar();
 
-  printf("Insira a nova descri√ß√£o: ");
+  printf("Insira a nova descriÁ„o: ");
   scanf("%s", gastos[indice].descricao);
 
   printf("Insira o novo valor: ");
@@ -132,10 +132,10 @@ int main() {
                 editarGasto(gastos, numGastos);
                 break;
             case 0:
-                printf("Saindo do programa. At√© mais!\n");
+                printf("Saindo do programa. AtÈ mais!\n");
                 break;
             default:
-                printf("Op√ß√£o inv√°lida. Tente novamente.\n");
+                printf("OperaÁ„o inv·lida. Tente novamente.\n");
         }
     } while (escolha != 0);
 
