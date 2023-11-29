@@ -3,6 +3,7 @@
 #include <string.h>
 #include <locale.h>
 
+
 struct Gasto {
     char descricao[100];
     float valor;
@@ -41,6 +42,7 @@ void exibirGastos(struct Gasto *gastos, int numGastos) {
         printf("    Valor: %.2f\n", gastos[i].valor);
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
+        system("pause");
     }
 }
 
@@ -51,11 +53,11 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
     }
 
     int indice;
-    printf("Digite o índice do gasto: ");
+    printf("Digite o Indice do gasto: ");
     scanf("%d", &indice);
 
     if (indice < 0 || indice >= numGastos) {
-        printf("Índice inválido.\n");
+        printf("Indice inválido.\n");
         return;
     }
 
@@ -70,35 +72,58 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
 }
 
 void editarGasto(struct Gasto *gastos, int numGastos) {
-  int indice;
-  
-  if (numGastos == 0) {
-    printf("Nenhum gasto cadastrado.\n");
-    return;
-  }
-  
-  printf("Digite o índice do gasto a ser editado: ");
-  scanf("%d", &indice);
+    if (numGastos == 0) {
+        printf("Nenhum gasto cadastrado.\n");
+        return;
+    }
 
-  if (indice < 0 || indice >= numGastos) {
-    printf("Índice inválido.\n");
-    return;
-  }
+    char nomeBusca[100];
+    printf("Digite o nome do gasto que deseja editar: ");
+    scanf("%s", nomeBusca);
 
-  getchar();
+    int indice = -1;  // Inicializa como -1 para indicar que não foi encontrado
+    for (int i = 0; i < numGastos; i++) {
+        if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
+            indice = i;
+            break;
+        }
+    }
 
-  printf("Insira a nova descrição: ");
-  scanf("%s", gastos[indice].descricao);
+    if (indice == -1) {
+        printf("Gasto não encontrado.\n");
+        return;
+    }
 
-  printf("Insira o novo valor: ");
-  scanf("%f", &gastos[indice].valor);
+    getchar();  // Limpar o buffer do teclado
 
-  printf("Insira a nova data (dd/mm/yyyy): ");
-  scanf("%s", gastos[indice].data);
+    printf("Escolha qual informação deseja editar:\n");
+    printf("1. Descrição\n");
+    printf("2. Valor\n");
+    printf("3. Data\n");
 
-  printf("Gasto editado com sucesso!\n");
+    int escolha;
+    scanf("%d", &escolha);
+
+    switch (escolha) {
+        case 1:
+            printf("Insira a nova descrição: ");
+            scanf("%s", gastos[indice].descricao);
+            break;
+        case 2:
+            printf("Insira o novo valor: ");
+            scanf("%f", &gastos[indice].valor);
+            break;
+        case 3:
+            printf("Insira a nova data (dd/mm/yyyy): ");
+            scanf("%s", gastos[indice].data);
+            break;
+        default:
+            printf("Opção inválida.\n");
+            return;
+    }
+
+    printf("Gasto editado com sucesso!\n");
 }
-
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -109,6 +134,10 @@ int main() {
 
     printf("Bem vindo ao seu Registro de Gastos\n");
     do {
+    	#ifdef _WIN32
+    	system("cls");
+    	#endif
+    	printf("\nNo que posso ajudar?\n");
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
@@ -135,7 +164,7 @@ int main() {
                 printf("Saindo do programa. Até mais!\n");
                 break;
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                printf("Operação inválida. Tente novamente.\n");
         }
     } while (escolha != 0);
 
