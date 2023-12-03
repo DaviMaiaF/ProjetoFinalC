@@ -52,17 +52,25 @@ void buscarGasto(struct Gasto *gastos, int numGastos) {
         return;
     }
 
-    int indice;
-    printf("Digite o Indice do gasto: ");
-    scanf("%d", &indice);
+    char nomeBusca[100];
+    printf("Digite o nome do gasto buscado: ");
+    scanf("%s", nomeBusca);
 
-    if (indice < 0 || indice >= numGastos) {
-        printf("Indice inválido.\n");
+    int indice = -1;  
+    for (int i = 0; i < numGastos; i++) {
+        if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice == -1) {
+        printf("Gasto não encontrado.\n");
         return;
     }
 
     getchar();
-  
+
     printf("Gasto encontrado:\n");
     printf("Descrição: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
@@ -81,7 +89,7 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
     printf("Digite o nome do gasto que deseja editar: ");
     scanf("%s", nomeBusca);
 
-    int indice = -1;  // Inicializa como -1 para indicar que não foi encontrado
+    int indice = -1;  
     for (int i = 0; i < numGastos; i++) {
         if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
             indice = i;
@@ -94,7 +102,7 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
         return;
     }
 
-    getchar();  // Limpar o buffer do teclado
+    getchar();  
 
     printf("Escolha qual informação deseja editar:\n");
     printf("1. Descrição\n");
@@ -124,6 +132,31 @@ void editarGasto(struct Gasto *gastos, int numGastos) {
 
     printf("Gasto editado com sucesso!\n");
 }
+void removerGasto(struct Gasto *gastos, int numGastos) {
+    if (numGastos == 0) {
+        printf("Nenhum gasto cadastrado.\n");
+        return;
+    }
+
+    char nomeBusca[100];
+    printf("Digite o nome do gasto que deseja remover: ");
+    scanf("%s", nomeBusca);
+
+    int encontrado = 0;
+    for (int i = 0; i < numGastos; i++) {
+        if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
+            gastos[i] = gastos[numGastos - 1];
+            (numGastos)--;
+            encontrado = 1;
+            printf("Gasto removido com sucesso!\n");
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Gasto não encontrado.\n");
+    }
+}
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -134,15 +167,16 @@ int main() {
 
     printf("Bem vindo ao seu Registro de Gastos\n");
     do {
-    	#ifdef _WIN32
-    	system("cls");
-    	#endif
-    	printf("\nNo que posso ajudar?\n");
+      #ifdef _WIN32
+      system("cls");
+      #endif
+      printf("\nNo que posso ajudar?\n");
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
         printf("3. Buscar nome do gasto\n");
         printf("4. Editar gasto\n");
+        printf("5. Remover gasto\n");
 
         printf("0. Sair\n");
         scanf("%d", &escolha);
@@ -159,6 +193,9 @@ int main() {
                 break;
             case 4:
                 editarGasto(gastos, numGastos);
+                break;
+            case 5:
+                removerGasto(gastos, numGastos);
                 break;
             case 0:
                 printf("Saindo do programa. Até mais!\n");
