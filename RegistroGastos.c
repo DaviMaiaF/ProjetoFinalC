@@ -14,7 +14,7 @@ void limparBuffer() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void somaMediaGastos(struct Gasto *gastos, int numGastos) {
+void somaMediaGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("Nenhum gasto cadastrado.\n");
         return;
@@ -28,6 +28,10 @@ void somaMediaGastos(struct Gasto *gastos, int numGastos) {
     float media = soma / numGastos;
     printf("Soma total dos gastos: %.2f\n", soma);
     printf("Média dos gastos: %.2f\n", media);
+
+    printf("Pressione Enter para continuar...");
+    limparBuffer();  // Limpar o buffer antes de aceitar a entrada do usuário
+    getchar();  // Aguardar a entrada do usuário
 }
 
 void inserirGasto(Gasto *gastos, int *numGastos) {
@@ -37,7 +41,7 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     }
 
     printf("Digite a descrição do gasto: ");
-    
+   
     // Limpar o buffer após a leitura da descrição
     limparBuffer();
     fgets(gastos[*numGastos].descricao, 100, stdin);
@@ -95,14 +99,14 @@ void buscarGasto(Gasto *gastos, int numGastos) {
         printf("Gasto não encontrado.\n");
         return;
     }
-    
+   
     getchar();
 
     printf("Gasto encontrado:\n");
     printf("Descrição: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
-    
+   
     return;
 }
 
@@ -131,8 +135,8 @@ void editarGasto(Gasto *gastos, int numGastos) {
         return;
     }
 
-	getchar();
-	
+getchar();
+
     printf("Escolha qual informação deseja editar:\n");
     printf("1. Descrição\n");
     printf("2. Valor\n");
@@ -193,7 +197,7 @@ void removerGasto(Gasto *gastos, int numGastos) {
 }
 
 void somarMedia(Gasto *gastos, int numGastos) {
-	somaMediaGastos(gastos, numGastos);
+somaMediaGastos(gastos, numGastos);
 }
 
 int main() {
@@ -215,7 +219,7 @@ int main() {
         printf("4. Editar gasto\n");
         printf("5. Remover gasto\n");
         printf("6. Somar média de gastos\n");
-        
+       
         printf("0. Sair\n");
         scanf("%d", &escolha);
 
@@ -236,8 +240,8 @@ int main() {
                 removerGasto(gastos, numGastos);
                 break;
             case 6:
-            	somarMedia(gastos, numGastos);
-            	break;
+            somarMedia(gastos, numGastos);
+            break;
             case 0:
                 printf("Saindo do programa. Até mais!\n");
                 break;
