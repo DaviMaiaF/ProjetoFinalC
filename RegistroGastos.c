@@ -170,7 +170,6 @@ int main() {
       #ifdef _WIN32
       system("cls");
       #endif
-      printf("\nNo que posso ajudar?\n");
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
