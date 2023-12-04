@@ -3,12 +3,27 @@
 #include <string.h>
 #include <locale.h>
 
-
 struct Gasto {
     char descricao[100];
     float valor;
     char data[11];
 };
+
+void somaMediaGastos(struct Gasto *gastos, int numGastos) {
+    if (numGastos == 0) {
+        printf("Nenhum gasto cadastrado.\n");
+        return;
+    }
+
+    float soma = 0;
+    for (int i = 0; i < numGastos; i++) {
+        soma += gastos[i].valor;
+    }
+
+    float media = soma / numGastos;
+    printf("Soma total dos gastos: %.2f\n", soma);
+    printf("Média dos gastos: %.2f\n", media);
+}
 
 void inserirGasto(struct Gasto *gastos, int *numGastos) {
     if (*numGastos >= 100) {
@@ -158,6 +173,10 @@ void removerGasto(struct Gasto *gastos, int numGastos) {
     }
 }
 
+void somarMedia(struct Gasto *gastos, int numGastos) {
+    somaMediaGastos(gastos, numGastos);
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
@@ -167,16 +186,16 @@ int main() {
 
     printf("Bem vindo ao seu Registro de Gastos\n");
     do {
-      #ifdef _WIN32
-      system("cls");
-      #endif
-      printf("\nNo que posso ajudar?\n");
+        #ifdef _WIN32
+        system("cls");
+        #endif
         printf("\nNo que posso ajudar?\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
         printf("3. Buscar nome do gasto\n");
         printf("4. Editar gasto\n");
         printf("5. Remover gasto\n");
+        printf("6. Somar média de gastos\n"); 
 
         printf("0. Sair\n");
         scanf("%d", &escolha);
@@ -196,6 +215,9 @@ int main() {
                 break;
             case 5:
                 removerGasto(gastos, numGastos);
+                break;
+            case 6:
+                somarMedia(gastos, numGastos); // Nova opção
                 break;
             case 0:
                 printf("Saindo do programa. Até mais!\n");
