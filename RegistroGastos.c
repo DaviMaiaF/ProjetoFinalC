@@ -88,7 +88,7 @@ void exibirGastos(Gasto *gastos, int numGastos) {
 
     printf("Lista de gastos:\n");
     for (int i = 0; i < numGastos; i++) {
-        printf("[%d] Descrição: %s\n", i, gastos[i].descricao);
+        printf("[%d] Descrição: %s\n", i + 1, gastos[i].descricao);
         printf("    Valor: %.2f\n", gastos[i].valor);
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
