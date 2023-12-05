@@ -34,6 +34,27 @@ void somaMediaGastos(Gasto *gastos, int numGastos) {
     getchar();  // Aguardar a entrada do usuário
 }
 
+// Função para salvar a lista de gastos em um arquivo
+void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para salvar.\n");
+        return;
+    }
+
+    for (int i = 0; i < numGastos; i++) {
+        fprintf(arquivo, "Descrição: %s\n", gastos[i].descricao);
+        fprintf(arquivo, "Valor: %.2f\n", gastos[i].valor);
+        fprintf(arquivo, "Data: %s\n", gastos[i].data);
+        fprintf(arquivo, "\n");
+    }
+
+    fclose(arquivo);
+
+    printf("Gastos salvos com sucesso no arquivo %s!\n", nomeArquivo);
+}
+
 void inserirGasto(Gasto *gastos, int *numGastos) {
     if (*numGastos >= 100) {
         printf("Limite de gastos atingido.\n");
@@ -219,6 +240,7 @@ int main() {
         printf("4. Editar gasto\n");
         printf("5. Remover gasto\n");
         printf("6. Somar média de gastos\n");
+        printf("7. Salvar lista de gastos em um arquivo\n");
        
         printf("0. Sair\n");
         scanf("%d", &escolha);
@@ -242,9 +264,12 @@ int main() {
             case 6:
             somarMedia(gastos, numGastos);
             break;
+            case 7:
+	    		salvarGastos(gastos, numGastos, "gastos.txt");
+	   			break;
             case 0:
-                printf("Saindo do programa. Até mais!\n");
-                break;
+            	printf("Saindo do programa. Até mais!\n");
+            break;
             default:
                 printf("Operação inválida. Tente novamente.\n");
         }
