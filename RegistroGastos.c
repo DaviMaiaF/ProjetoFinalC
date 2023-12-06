@@ -121,8 +121,7 @@ void exibirGastos(Gasto *gastos, int numGastos) {
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
     }
-    system("pause");
-
+    
     printf("\nPressione Enter para continuar...");
     limparBuffer();
     getchar();
