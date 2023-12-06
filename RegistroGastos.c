@@ -105,14 +105,6 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     printf("\nPressione Enter para continuar...");
     limparBuffer();
     getchar();
-
-    (*numGastos)++;
-
-    printf("\nGasto adicionado com sucesso!\n");
-
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
 }
 
 void exibirGastos(Gasto *gastos, int numGastos) {
