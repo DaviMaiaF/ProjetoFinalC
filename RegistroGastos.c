@@ -17,6 +17,7 @@ void limparBuffer() {
 void somaMediaGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
+        system("pause");
         return;
     }
 
@@ -94,6 +95,7 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
 void exibirGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
+        system("pause");
         return;
     }
 
@@ -117,6 +119,7 @@ void buscarGasto(Gasto *gastos, int numGastos) {
         printf("\nPressione Enter para continuar...");
         limparBuffer();
         getchar();
+        system("pause");
         return;
     }
 
@@ -225,6 +228,7 @@ void editarGasto(Gasto *gastos, int numGastos) {
 void removerGasto(Gasto *gastos, int *numGastos) {
     if (*numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
+        system("pause");
         return;
     }
 
