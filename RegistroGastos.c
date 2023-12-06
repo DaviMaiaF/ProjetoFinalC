@@ -72,7 +72,6 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     }
 
     printf("\nDigite a descrição do gasto: ");
-
     limparBuffer();
     fgets(gastos[*numGastos].descricao, 100, stdin);
     gastos[*numGastos].descricao[strcspn(gastos[*numGastos].descricao, "\n")] = '\0';
@@ -80,8 +79,32 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     printf("Digite o valor do gasto: ");
     scanf("%f", &gastos[*numGastos].valor);
 
+
+    int dia, mes, ano;
     printf("Digite a data do gasto (dd/mm/yyyy): ");
-    scanf("%s", gastos[*numGastos].data);
+    if (scanf("%d/%d/%d", &dia, &mes, &ano) != 3) {
+        printf("\nFormato de data inválido!\n");
+        printf("\nPressione Enter para continuar...");
+        limparBuffer();
+        getchar();
+        return;
+    }
+    if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900 || ano > 2100) {
+        printf("\nData inválida!\n");
+        printf("\nPressione Enter para continuar...");
+        limparBuffer();
+        getchar();
+        return;
+    }
+
+    sprintf(gastos[*numGastos].data, "%02d/%02d/%04d", dia, mes, ano);
+    (*numGastos)++;
+
+    printf("\nGasto adicionado com sucesso!\n");
+
+    printf("\nPressione Enter para continuar...");
+    limparBuffer();
+    getchar();
 
     (*numGastos)++;
 
