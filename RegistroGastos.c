@@ -244,7 +244,7 @@ int main() {
     do {
     #ifdef _WIN32
         system("cls");
-	#endif
+    #endif
         
         printf("\nNo que posso ajudar?\n\n");
         printf("1. Inserir novo gasto\n");
