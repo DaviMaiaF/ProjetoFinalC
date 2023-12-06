@@ -242,6 +242,10 @@ int main() {
 
     printf("Bem vindo ao seu Registro de Gastos\n");
     do {
+    #ifdef _WIN32
+        system("cls");
+	#endif
+        
         printf("\nNo que posso ajudar?\n\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
