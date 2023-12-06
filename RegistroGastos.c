@@ -7,7 +7,7 @@ typedef struct Gasto {
     char descricao[100];
     float valor;
     char data[11];
-}Gasto;
+} Gasto;
 
 void limparBuffer() {
     int c;
@@ -30,8 +30,8 @@ void somaMediaGastos(Gasto *gastos, int numGastos) {
     printf("Média dos gastos: %.2f\n", media);
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
-    getchar(); 
+    limparBuffer();
+    getchar();
 }
 
 void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
@@ -40,7 +40,7 @@ void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
     if (arquivo == NULL) {
         printf("\nErro ao abrir o arquivo para salvar.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
@@ -57,7 +57,7 @@ void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
     printf("\nGastos salvos com sucesso no arquivo %s!\n", nomeArquivo);
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
@@ -65,7 +65,7 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     if (*numGastos >= 100) {
         printf("Limite de gastos atingido.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
@@ -75,7 +75,6 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     limparBuffer();
     fgets(gastos[*numGastos].descricao, 100, stdin);
     gastos[*numGastos].descricao[strcspn(gastos[*numGastos].descricao, "\n")] = '\0';
-
 
     printf("Digite o valor do gasto: ");
     scanf("%f", &gastos[*numGastos].valor);
@@ -88,7 +87,7 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     printf("\nGasto adicionado com sucesso!\n");
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
@@ -108,7 +107,7 @@ void exibirGastos(Gasto *gastos, int numGastos) {
     system("pause");
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
@@ -116,16 +115,16 @@ void buscarGasto(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
 
     char nomeBusca[100];
-    limparBuffer();  
+    limparBuffer();
     printf("\nDigite o nome do gasto buscado: ");
     fgets(nomeBusca, sizeof(nomeBusca), stdin);
-    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';  
+    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
 
     int indice = -1;
     for (int i = 0; i < numGastos; i++) {
@@ -138,7 +137,7 @@ void buscarGasto(Gasto *gastos, int numGastos) {
     if (indice == -1) {
         printf("\nGasto não encontrado.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
@@ -151,7 +150,7 @@ void buscarGasto(Gasto *gastos, int numGastos) {
     printf("Data: %s\n", gastos[indice].data);
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
@@ -159,16 +158,16 @@ void editarGasto(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
 
     char nomeBusca[100];
-    limparBuffer();  
+    limparBuffer();
     printf("\nDigite o nome do gasto que deseja editar: ");
     fgets(nomeBusca, sizeof(nomeBusca), stdin);
-    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';  
+    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
 
     int indice = -1;
     for (int i = 0; i < numGastos; i++) {
@@ -181,12 +180,12 @@ void editarGasto(Gasto *gastos, int numGastos) {
     if (indice == -1) {
         printf("\nGasto não encontrado.\n");
         printf("\nPressione Enter para continuar...");
-        limparBuffer();  
+        limparBuffer();
         getchar();
         return;
     }
 
-getchar();
+    getchar();
 
     printf("Escolha qual informação deseja editar:\n\n");
     printf("1. Descrição\n");
@@ -219,27 +218,27 @@ getchar();
     printf("\nGasto editado com sucesso!\n");
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
-void removerGasto(Gasto *gastos, int numGastos) {
-    if (numGastos == 0) {
+void removerGasto(Gasto *gastos, int *numGastos) {
+    if (*numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
         return;
     }
 
     char nomeBusca[100];
-    limparBuffer();  
+    limparBuffer();
     printf("\nDigite o nome do gasto que deseja remover: ");
     fgets(nomeBusca, sizeof(nomeBusca), stdin);
-    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';  
+    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
 
     int encontrado = 0;
-    for (int i = 0; i < numGastos; i++) {
+    for (int i = 0; i < *numGastos; i++) {
         if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
-            gastos[i] = gastos[numGastos - 1];
-            (numGastos)--;
+            gastos[i] = gastos[*numGastos - 1];
+            (*numGastos)--;
             encontrado = 1;
             printf("\nGasto removido com sucesso!\n");
             break;
@@ -251,19 +250,20 @@ void removerGasto(Gasto *gastos, int numGastos) {
     }
 
     printf("\nPressione Enter para continuar...");
-    limparBuffer();  
+    limparBuffer();
     getchar();
 }
 
 void somarMedia(Gasto *gastos, int numGastos) {
-somaMediaGastos(gastos, numGastos);
+    somaMediaGastos(gastos, numGastos);
 }
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
 
-    Gasto*  gastos = (Gasto*)malloc(100 * sizeof(Gasto));;
-    int numGastos = 0;
+    Gasto *gastos = (Gasto *)malloc(100 * sizeof(Gasto));
+    int *numGastos = (int *)malloc(sizeof(int));
+    *numGastos = 0;
     int escolha;
 
     printf("Bem vindo ao seu Registro de Gastos\n");
@@ -285,33 +285,34 @@ int main() {
 
         switch (escolha) {
             case 1:
-                inserirGasto(gastos, &numGastos);
+                inserirGasto(gastos, numGastos);
                 break;
             case 2:
-                exibirGastos(gastos, numGastos);
+                exibirGastos(gastos, *numGastos);
                 break;
             case 3:
-                buscarGasto(gastos, numGastos);
+                buscarGasto(gastos, *numGastos);
                 break;
             case 4:
-                editarGasto(gastos, numGastos);
+                editarGasto(gastos, *numGastos);
                 break;
             case 5:
                 removerGasto(gastos, numGastos);
                 break;
             case 6:
-            somarMedia(gastos, numGastos);
-            break;
+                somarMedia(gastos, *numGastos);
+                break;
             case 7:
-          salvarGastos(gastos, numGastos, "gastos.txt");
-          break;
+                salvarGastos(gastos, *numGastos, "gastos.txt");
+                break;
             case 0:
-              printf("\nSaindo do programa. Até mais!\n");
-            break;
+                printf("\nSaindo do programa. Até mais!\n");
+                break;
             default:
                 printf("\nOperação inválida. Tente novamente.\n");
         }
     } while (escolha != 0);
+
 
     return 0;
 }
