@@ -13,14 +13,14 @@ Este é o repositório do projeto final da aula de Algoritmos e Programação Es
 
 • Salvar em um arquivo: Após se utilizar o programa é possivel salvar em um arquivo formato .txt.
 
-# Licença
-Este projeto é licenciado sob a Licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
-
 # Creditos
-Ana Carolina
-Davi Maia de Figueiredo
-Davi Aquiles 
-João Pedro Natividade Ferreira
+• Ana Carolina de Andrade Silva
+
+• Davi Maia de Figueiredo
+
+• Davi Aquiles Maito Vital
+
+• João Pedro Natividade Ferreira
 
 # Licença
 Este projeto é licenciado sob a Licença MIT. Consulte o arquivo LICENSE para obter mais detalhes.
