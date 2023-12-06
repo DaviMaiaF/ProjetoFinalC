@@ -39,7 +39,17 @@ void somaMediaGastos(Gasto *gastos, int numGastos) {
     esperarTecla();
 }
 
-void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
+void salvarGastos(Gasto *gastos, int numGastos) {
+    char nomeArquivo[100];
+
+    printf("\nDigite o nome do arquivo para salvar os gastos: ");
+    limparBuffer();
+    fgets(nomeArquivo, sizeof(nomeArquivo), stdin);
+    nomeArquivo[strcspn(nomeArquivo, "\n")] = '\0';
+
+    // Adiciona a extensão ".txt" ao nome do arquivo
+    strcat(nomeArquivo, ".txt");
+
     FILE *arquivo = fopen(nomeArquivo, "w");
 
     if (arquivo == NULL) {
@@ -116,19 +126,7 @@ void exibirGastos(Gasto *gastos, int numGastos) {
     esperarTecla();
 }
 
-void buscarGasto(Gasto *gastos, int numGastos) {
-    if (numGastos == 0) {
-        printf("\nNenhum gasto cadastrado.\n");
-        esperarTecla();
-        return;
-    }
-
-    char nomeBusca[100];
-    limparBuffer();
-    printf("\nDigite o nome do gasto buscado: ");
-    fgets(nomeBusca, sizeof(nomeBusca), stdin);
-    nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
-
+void buscarGasto(Gasto *gastos, int numGastos, const char *nomeBusca) {
     int indice = -1;
     for (int i = 0; i < numGastos; i++) {
         if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
@@ -143,8 +141,6 @@ void buscarGasto(Gasto *gastos, int numGastos) {
         return;
     }
 
-    getchar();
-
     printf("Gasto encontrado:\n");
     printf("Descrição: %s\n", gastos[indice].descricao);
     printf("Valor: %.2f\n", gastos[indice].valor);
@@ -154,12 +150,6 @@ void buscarGasto(Gasto *gastos, int numGastos) {
 }
 
 void editarGasto(Gasto *gastos, int numGastos) {
-    if (numGastos == 0) {
-        printf("\nNenhum gasto cadastrado.\n");
-        esperarTecla();
-        return;
-    }
-
     char nomeBusca[100];
     limparBuffer();
     printf("\nDigite o nome do gasto que deseja editar: ");
@@ -179,8 +169,6 @@ void editarGasto(Gasto *gastos, int numGastos) {
         esperarTecla();
         return;
     }
-
-    getchar();
 
     printf("Escolha qual informação deseja editar:\n\n");
     printf("1. Descrição\n");
@@ -216,12 +204,6 @@ void editarGasto(Gasto *gastos, int numGastos) {
 }
 
 void removerGasto(Gasto *gastos, int *numGastos) {
-    if (*numGastos == 0) {
-        printf("\nNenhum gasto cadastrado.\n");
-        esperarTecla();
-        return;
-    }
-
     char nomeBusca[100];
     limparBuffer();
     printf("\nDigite o nome do gasto que deseja remover: ");
@@ -260,9 +242,6 @@ int main() {
 
     printf("Bem vindo ao seu Registro de Gastos\n");
     do {
-#ifdef _WIN32
-        system("cls");
-#endif
         printf("\nNo que posso ajudar?\n\n");
         printf("1. Inserir novo gasto\n");
         printf("2. Exibir gastos\n");
@@ -282,9 +261,15 @@ int main() {
             case 2:
                 exibirGastos(gastos, *numGastos);
                 break;
-            case 3:
-                buscarGasto(gastos, *numGastos);
+            case 3: {
+                char nomeBusca[100];
+                limparBuffer();
+                printf("\nDigite o nome do gasto buscado: ");
+                fgets(nomeBusca, sizeof(nomeBusca), stdin);
+                nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
+                buscarGasto(gastos, *numGastos, nomeBusca);
                 break;
+            }
             case 4:
                 editarGasto(gastos, *numGastos);
                 break;
@@ -295,7 +280,7 @@ int main() {
                 somarMedia(gastos, *numGastos);
                 break;
             case 7:
-                salvarGastos(gastos, *numGastos, "gastos.txt");
+                salvarGastos(gastos, *numGastos);
                 break;
             case 0:
                 printf("\nSaindo do programa. Até mais!\n");
