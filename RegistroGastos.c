@@ -14,10 +14,16 @@ void limparBuffer() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+void esperarTecla() {
+    printf("\nPressione Enter para continuar...");
+    limparBuffer();
+    getchar();
+}
+
 void somaMediaGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
-        system("pause");
+        esperarTecla();
         return;
     }
 
@@ -30,9 +36,7 @@ void somaMediaGastos(Gasto *gastos, int numGastos) {
     printf("\nSoma total dos gastos: %.2f\n", soma);
     printf("Média dos gastos: %.2f\n", media);
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
@@ -40,9 +44,7 @@ void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
 
     if (arquivo == NULL) {
         printf("\nErro ao abrir o arquivo para salvar.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -57,17 +59,13 @@ void salvarGastos(Gasto *gastos, int numGastos, const char *nomeArquivo) {
 
     printf("\nGastos salvos com sucesso no arquivo %s!\n", nomeArquivo);
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void inserirGasto(Gasto *gastos, int *numGastos) {
     if (*numGastos >= 100) {
         printf("Limite de gastos atingido.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -79,21 +77,16 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     printf("Digite o valor do gasto: ");
     scanf("%f", &gastos[*numGastos].valor);
 
-
     int dia, mes, ano;
     printf("Digite a data do gasto (dd/mm/yyyy): ");
     if (scanf("%d/%d/%d", &dia, &mes, &ano) != 3) {
         printf("\nFormato de data inválido!\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
     if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900 || ano > 2100) {
         printf("\nData inválida!\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -102,15 +95,13 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
 
     printf("\nGasto adicionado com sucesso!\n");
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void exibirGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
-        system("pause");
+        esperarTecla();
         return;
     }
 
@@ -121,19 +112,14 @@ void exibirGastos(Gasto *gastos, int numGastos) {
         printf("    Data: %s\n", gastos[i].data);
         printf("\n");
     }
-    
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+
+    esperarTecla();
 }
 
 void buscarGasto(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
-        system("pause");
+        esperarTecla();
         return;
     }
 
@@ -153,9 +139,7 @@ void buscarGasto(Gasto *gastos, int numGastos) {
 
     if (indice == -1) {
         printf("\nGasto não encontrado.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -166,17 +150,13 @@ void buscarGasto(Gasto *gastos, int numGastos) {
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void editarGasto(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -196,9 +176,7 @@ void editarGasto(Gasto *gastos, int numGastos) {
 
     if (indice == -1) {
         printf("\nGasto não encontrado.\n");
-        printf("\nPressione Enter para continuar...");
-        limparBuffer();
-        getchar();
+        esperarTecla();
         return;
     }
 
@@ -234,15 +212,13 @@ void editarGasto(Gasto *gastos, int numGastos) {
 
     printf("\nGasto editado com sucesso!\n");
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void removerGasto(Gasto *gastos, int *numGastos) {
     if (*numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
-        system("pause");
+        esperarTecla();
         return;
     }
 
@@ -267,9 +243,7 @@ void removerGasto(Gasto *gastos, int *numGastos) {
         printf("\nGasto não encontrado.\n");
     }
 
-    printf("\nPressione Enter para continuar...");
-    limparBuffer();
-    getchar();
+    esperarTecla();
 }
 
 void somarMedia(Gasto *gastos, int numGastos) {
@@ -331,6 +305,8 @@ int main() {
         }
     } while (escolha != 0);
 
+    free(gastos);
+    free(numGastos);
 
     return 0;
 }
