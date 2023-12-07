@@ -82,7 +82,8 @@ void salvarGastos(Gasto *gastos, int numGastos) {
 
     printf("\n\033[1;92mGastos salvos com sucesso no arquivo\033[0m %s!\n", nomeArquivo);
 
-    esperarTecla();
+    printf("\nPressione Enter para continuar...");
+    getchar();
 }
 
 void inserirGasto(Gasto *gastos, int *numGastos) {
