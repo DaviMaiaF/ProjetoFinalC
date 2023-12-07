@@ -162,7 +162,8 @@ void buscarGasto(Gasto *gastos, int numGastos, const char *nomeBusca) {
     printf("Valor: %.2f\n", gastos[indice].valor);
     printf("Data: %s\n", gastos[indice].data);
 
-    esperarTecla();
+    printf("\nPressione Enter para continuar...");
+    getchar();
 }
 
 void editarGasto(Gasto *gastos, int numGastos) {
@@ -228,11 +229,10 @@ void removerGasto(Gasto *gastos, int *numGastos) {
     fgets(nomeBusca, sizeof(nomeBusca), stdin);
     nomeBusca[strcspn(nomeBusca, "\n")] = '\0';
 
-    int encontrado = 0;
-    for (int i = 0; i < *numGastos; i++) {
+     int encontrado = 0;
+    for (int i = 0; i < *numGastos - 1; i++) {
         if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
             gastos[i] = gastos[*numGastos - 1];
-            (*numGastos)--;
             encontrado = 1;
             printf("\n\033[1;92mGasto removido com sucesso!\033[0m\n");
             break;
@@ -243,7 +243,8 @@ void removerGasto(Gasto *gastos, int *numGastos) {
         printf("\n\033[1;31mGasto não encontrado.\033[0m\n");
     }
 
-    esperarTecla();
+    printf("\nPressione Enter para continuar...");
+    getchar();
 }
 
 void somarMedia(Gasto *gastos, int numGastos) {
