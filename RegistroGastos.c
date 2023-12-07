@@ -20,6 +20,19 @@ void esperarTecla() {
     getchar();
 }
 
+void imprimirSeparador() {
+    printf("\n----------------------------------------\n");
+}
+
+void imprimirCabecalho(const char *mensagem) {
+    printf("\033[1;34m");  // Configura a cor do texto 
+    imprimirSeparador();
+    printf("%s\n", mensagem);
+    imprimirSeparador();
+    printf("\033[0m");  // Restaura a cor do texto para padrão
+}
+
+
 void somaMediaGastos(Gasto *gastos, int numGastos) {
     if (numGastos == 0) {
         printf("\nNenhum gasto cadastrado.\n");
@@ -67,12 +80,13 @@ void salvarGastos(Gasto *gastos, int numGastos) {
 
     fclose(arquivo);
 
-    printf("\nGastos salvos com sucesso no arquivo %s!\n", nomeArquivo);
+    printf("\n\033[1;92mGastos salvos com sucesso no arquivo\033[0m %s!\n", nomeArquivo);
 
     esperarTecla();
 }
 
 void inserirGasto(Gasto *gastos, int *numGastos) {
+	imprimirCabecalho("Novo gasto:");
     if (*numGastos >= 100) {
         printf("Limite de gastos atingido.\n");
         esperarTecla();
@@ -90,12 +104,12 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     int dia, mes, ano;
     printf("Digite a data do gasto (dd/mm/yyyy): ");
     if (scanf("%d/%d/%d", &dia, &mes, &ano) != 3) {
-        printf("\nFormato de data inválido!\n");
+        printf("\n\033[1;31mFormato de data inválido!\033[0m\n");
         esperarTecla();
         return;
     }
     if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900 || ano > 2100) {
-        printf("\nData inválida!\n");
+        printf("\n\033[1;31mData inválida!\033[0m\n");
         esperarTecla();
         return;
     }
@@ -103,14 +117,15 @@ void inserirGasto(Gasto *gastos, int *numGastos) {
     sprintf(gastos[*numGastos].data, "%02d/%02d/%04d", dia, mes, ano);
     (*numGastos)++;
 
-    printf("\nGasto adicionado com sucesso!\n");
+    printf("\n\033[1;92mGasto adicionado com sucesso!\033[0m\n");
 
     esperarTecla();
 }
 
 void exibirGastos(Gasto *gastos, int numGastos) {
+	 imprimirCabecalho("Lista de Gastos:");
     if (numGastos == 0) {
-        printf("\nNenhum gasto cadastrado.\n");
+        printf("\n\033[1;31mNenhum gasto cadastrado.\033[0m\n");
         esperarTecla();
         return;
     }
@@ -127,6 +142,7 @@ void exibirGastos(Gasto *gastos, int numGastos) {
 }
 
 void buscarGasto(Gasto *gastos, int numGastos, const char *nomeBusca) {
+	 imprimirCabecalho("Busca de Gasto:");
     int indice = -1;
     for (int i = 0; i < numGastos; i++) {
         if (strcmp(gastos[i].descricao, nomeBusca) == 0) {
@@ -136,7 +152,7 @@ void buscarGasto(Gasto *gastos, int numGastos, const char *nomeBusca) {
     }
 
     if (indice == -1) {
-        printf("\nGasto não encontrado.\n");
+        printf("\n\033[1;31mGasto não encontrado.\033[0m\n");
         esperarTecla();
         return;
     }
@@ -150,6 +166,7 @@ void buscarGasto(Gasto *gastos, int numGastos, const char *nomeBusca) {
 }
 
 void editarGasto(Gasto *gastos, int numGastos) {
+	imprimirCabecalho("Edição de gasto:");
     char nomeBusca[100];
     limparBuffer();
     printf("\nDigite o nome do gasto que deseja editar: ");
@@ -165,7 +182,7 @@ void editarGasto(Gasto *gastos, int numGastos) {
     }
 
     if (indice == -1) {
-        printf("\nGasto não encontrado.\n");
+        printf("\n\033[1;31mGasto não encontrado.\033[0m\n");
         esperarTecla();
         return;
     }
@@ -194,16 +211,17 @@ void editarGasto(Gasto *gastos, int numGastos) {
             scanf("%s", gastos[indice].data);
             break;
         default:
-            printf("\nOpção inválida.\n");
+            printf("\n\033[1;31mOpção inválida.\033[0m\n");
             return;
     }
 
-    printf("\nGasto editado com sucesso!\n");
+    printf("\n\033[1;92mGasto editado com sucesso!\033[0m\n");
 
     esperarTecla();
 }
 
 void removerGasto(Gasto *gastos, int *numGastos) {
+	imprimirCabecalho("Remoção de gasto");
     char nomeBusca[100];
     limparBuffer();
     printf("\nDigite o nome do gasto que deseja remover: ");
@@ -216,19 +234,20 @@ void removerGasto(Gasto *gastos, int *numGastos) {
             gastos[i] = gastos[*numGastos - 1];
             (*numGastos)--;
             encontrado = 1;
-            printf("\nGasto removido com sucesso!\n");
+            printf("\n\033[1;92mGasto removido com sucesso!\033[0m\n");
             break;
         }
     }
 
     if (!encontrado) {
-        printf("\nGasto não encontrado.\n");
+        printf("\n\033[1;31mGasto não encontrado.\033[0m\n");
     }
 
     esperarTecla();
 }
 
 void somarMedia(Gasto *gastos, int numGastos) {
+	imprimirCabecalho("Soma e Média de Gastos:");
     somaMediaGastos(gastos, numGastos);
 }
 
@@ -244,7 +263,7 @@ int main() {
     do {
     #ifdef _WIN32
         system("cls");
-	#endif
+    #endif
         
         printf("\nNo que posso ajudar?\n\n");
         printf("1. Inserir novo gasto\n");
